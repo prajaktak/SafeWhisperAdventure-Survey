@@ -69,6 +69,9 @@ main {
 /* Welcome Section */
 .welcome-section {
     text-align: center;
+    background: linear-gradient(180deg, #e8f5f3 0%, #ffffff 100%);
+    padding: 20px;
+    border-radius: 0 0 15px 15px;
 }
 
 .audio-control {
