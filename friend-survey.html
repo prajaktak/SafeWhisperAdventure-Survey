@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Friend Survey - SafeWhisper Adventure</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐾 Game Friend Survey</h1>
+            <div class="progress-bar">
+                <div id="progress" class="progress-fill"></div>
+            </div>
+        </header>
+
+        <main>
+            <form id="friendSurvey">
+                <!-- Question 1 -->
+                <div class="question active" data-question="1">
+                    <button type="button" class="listen-btn" data-text="Do you have a pet at home?">
+                        🔊 Listen to Question
+                    </button>
+                    <h2>Do you have a pet at home?</h2>
+                    <div class="options emoji-options">
+                        <button type="button" class="option-btn" data-value="yes">
+                            <span class="emoji">✅</span>
+                            <span class="label">Yes</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="no">
+                            <span class="emoji">❌</span>
+                            <span class="label">No</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="q1" required>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question" data-question="2">
+                    <button type="button" class="listen-btn" data-text="Would you like a special friend or helper in your game?">
+                        🔊 Listen to Question
+                    </button>
+                    <h2>Would you like a game friend?</h2>
+                    <div class="options emoji-options">
+                        <button type="button" class="option-btn" data-value="yes-definitely">
+                            <span class="emoji">😁</span>
+                            <span class="label">Yes, definitely!</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="yes-nice">
+                            <span class="emoji">😊</span>
+                            <span class="label">Yes, nice</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="maybe">
+                            <span class="emoji">😐</span>
+                            <span class="label">Maybe</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="q2" required>
+                </div>
+
+                <!-- Question 3 - Animals -->
+                <div class="question" data-question="3">
+                    <button type="button" class="listen-btn" data-text="What would you want your game friend to be? Pick your top 3 favorites from animals!">
+                        🔊 Listen to Question
+                    </button>
+                    <h2>Pick your favorite ANIMALS!</h2>
+                    <p class="hint">Pick your top 3!</p>
+                    <div class="options icon-options multi-select" data-max="3">
+                        <button type="button" class="option-btn" data-value="dog">
+                            <span class="emoji">🐶</span>
+                            <span class="label">Dog</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="cat">
+                            <span class="emoji">🐱</span>
+                            <span class="label">Cat</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="rabbit">
+                            <span class="emoji">🐰</span>
+                            <span class="label">Rabbit</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="bird">
+                            <span class="emoji">🐦</span>
+                            <span class="label">Bird</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="horse">
+                            <span class="emoji">🐴</span>
+                            <span class="label">Horse</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="dolphin">
+                            <span class="emoji">🐬</span>
+                            <span class="label">Dolphin</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="monkey">
+                            <span class="emoji">🐵</span>
+                            <span class="label">Monkey</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="lion">
+                            <span class="emoji">🦁</span>
+                            <span class="label">Lion</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="q3_animals" required>
+                </div>
+
+                <!-- Question 4 - Fantasy -->
+                <div class="question" data-question="4">
+                    <button type="button" class="listen-btn" data-text="What about magical or fantasy friends? Pick your favorites!">
+                        🔊 Listen to Question
+                    </button>
+                    <h2>Pick your favorite MAGICAL friends!</h2>
+                    <p class="hint">Pick your top 3!</p>
+                    <div class="options icon-options multi-select" data-max="3">
+                        <button type="button" class="option-btn" data-value="dragon">
+                            <span class="emoji">🐉</span>
+                            <span class="label">Dragon</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="unicorn">
+                            <span class="emoji">🦄</span>
+                            <span class="label">Unicorn</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="fairy">
+                            <span class="emoji">🧚</span>
+                            <span class="label">Fairy</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="dinosaur">
+                            <span class="emoji">🦖</span>
+                            <span class="label">Dinosaur</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="star">
+                            <span class="emoji">⭐</span>
+                            <span class="label">Star</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="magic">
+                            <span class="emoji">✨</span>
+                            <span class="label">Magic creature</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="q4_fantasy">
+                </div>
+
+                <!-- Question 5 - Robots/Tech -->
+                <div class="question" data-question="5">
+                    <button type="button" class="listen-btn" data-text="What about robots or vehicles? Pick your favorites!">
+                        🔊 Listen to Question
+                    </button>
+                    <h2>Pick your favorite ROBOTS or VEHICLES!</h2>
+                    <p class="hint">Pick your favorites!</p>
+                    <div class="options icon-options multi-select" data-max="3">
+                        <button type="button" class="option-btn" data-value="robot">
+                            <span class="emoji">🤖</span>
+                            <span class="label">Robot</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="car">
+                            <span class="emoji">🚗</span>
+                            <span class="label">Car</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="airplane">
+                            <span class="emoji">✈️</span>
+                            <span class="label">Airplane</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="rocket">
+                            <span class="emoji">🚀</span>
+                            <span class="label">Rocket</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="superhero">
+                            <span class="emoji">🦸</span>
+                            <span class="label">Superhero</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="q5_tech">
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question" data-question="6">
+                    <button type="button" class="listen-btn" data-text="What should your game friend do? Pick all that you like!">
+                        🔊 Listen to Question
+                    </button>
+                    <h2>What should your friend do?</h2>
+                    <p class="hint">Pick all you like!</p>
+                    <div class="options icon-options multi-select">
+                        <button type="button" class="option-btn" data-value="help">
+                            <span class="emoji">💡</span>
+                            <span class="label">Help me</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="cheer">
+                            <span class="emoji">👏</span>
+                            <span class="label">Cheer for me</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="play">
+                            <span class="emoji">🎮</span>
+                            <span class="label">Play with me</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="protect">
+                            <span class="emoji">🛡️</span>
+                            <span class="label">Keep me safe</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="laugh">
+                            <span class="emoji">😂</span>
+                            <span class="label">Make me laugh</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="friend">
+                            <span class="emoji">🤗</span>
+                            <span class="label">Be my friend</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="q6" required>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question" data-question="7">
+                    <button type="button" class="listen-btn" data-text="How should your game friend look?">
+                        🔊 Listen to Question
+                    </button>
+                    <h2>How should your friend look?</h2>
+                    <p class="hint">Pick all you like!</p>
+                    <div class="options icon-options multi-select">
+                        <button type="button" class="option-btn" data-value="cute">
+                            <span class="emoji">🥰</span>
+                            <span class="label">Cute & friendly</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="cool">
+                            <span class="emoji">😎</span>
+                            <span class="label">Cool & strong</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="colorful">
+                            <span class="emoji">🌈</span>
+                            <span class="label">Colorful</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="funny">
+                            <span class="emoji">😄</span>
+                            <span class="label">Funny</span>
+                        </button>
+                        <button type="button" class="option-btn" data-value="magical">
+                            <span class="emoji">✨</span>
+                            <span class="label">Magical</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="q7" required>
+                </div>
+
+                <!-- Student Info -->
+                <div class="question" data-question="8">
+                    <h2>Almost done!</h2>
+                    <div class="info-section">
+                        <label>Your Age:</label>
+                        <div class="age-buttons">
+                            <button type="button" class="age-btn" data-age="5">5</button>
+                            <button type="button" class="age-btn" data-age="6">6</button>
+                            <button type="button" class="age-btn" data-age="7">7</button>
+                            <button type="button" class="age-btn" data-age="8">8</button>
+                            <button type="button" class="age-btn" data-age="9">9</button>
+                            <button type="button" class="age-btn" data-age="10">10+</button>
+                        </div>
+                        <input type="hidden" name="age" required>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="question" data-question="9">
+                    <div class="thank-you">
+                        <h2>🌟 Thank You! 🌟</h2>
+                        <p>Ready to submit your answers?</p>
+                        <button type="submit" class="btn btn-submit">Submit Survey</button>
+                    </div>
+                </div>
+
+                <div class="navigation">
+                    <button type="button" id="prevBtn" class="btn btn-secondary">← Previous</button>
+                    <button type="button" id="nextBtn" class="btn btn-primary">Next →</button>
+                </div>
+            </form>
+
+            <div id="completionMessage" class="completion-message" style="display: none;">
+                <h2>🎉 All Done! 🎉</h2>
+                <p>Thank you for helping us!</p>
+                <a href="index.html" class="btn btn-primary">Back to Home</a>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

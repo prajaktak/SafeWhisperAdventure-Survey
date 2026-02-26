@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeWhisper Adventure - Student Survey</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌟 SafeWhisper Adventure 🌟</h1>
+            <h2>Student Survey</h2>
+            <p class="subtitle">Help us make the best games for you!</p>
+        </header>
+
+        <main>
+            <div class="welcome-section">
+                <div class="audio-control">
+                    <button id="playWelcome" class="play-btn">
+                        🔊 Click to hear welcome message
+                    </button>
+                </div>
+
+                <div class="survey-cards">
+                    <div class="card">
+                        <div class="card-icon">🎮</div>
+                        <h3>Game Survey</h3>
+                        <p>Tell us what games you like!</p>
+                        <a href="game-survey.html" class="btn btn-primary">Start Game Survey</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">🐾</div>
+                        <h3>Game Friend Survey</h3>
+                        <p>Tell us about your favorite game friends!</p>
+                        <a href="friend-survey.html" class="btn btn-primary">Start Friend Survey</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>SafeWhisper Adventure © 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        // Welcome message audio
+        const welcomeBtn = document.getElementById('playWelcome');
+
+        welcomeBtn.addEventListener('click', () => {
+            const msg = new SpeechSynthesisUtterance();
+            msg.text = "Welcome to SafeWhisper Adventure Survey! We want to know what games you like and what kind of game friends you want. Click on a survey to start!";
+            msg.rate = 0.9;
+            msg.pitch = 1.1;
+            window.speechSynthesis.speak(msg);
+
+            welcomeBtn.textContent = '🔊 Playing...';
+
+            msg.onend = () => {
+                welcomeBtn.textContent = '🔊 Click to hear welcome message';
+            };
+        });
+    </script>
+</body>
+</html>
