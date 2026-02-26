@@ -8,7 +8,7 @@
 
 body {
     font-family: 'Comic Sans MS', 'Arial', sans-serif;
-    background: linear-gradient(135deg, #a8c0ff 0%, #c3e0e5 100%);
+    background: white;
     min-height: 100vh;
     padding: 20px;
 }
