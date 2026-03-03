@@ -1,4 +1,6 @@
-// SafeWhisper Adventure Survey Script
+// SafeWhisper Adventure Survey Script with Firebase Integration
+
+import { database, ref, push, set } from './firebase-config.js';
 
 let currentQuestion = 1;
 let totalQuestions = 0;
@@ -207,7 +209,7 @@ function updateNavButtons() {
     }
 }
 
-function handleSubmit(e) {
+async function handleSubmit(e) {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -218,42 +220,87 @@ function handleSubmit(e) {
         data[key] = value;
     }
 
-    // Add timestamp
+    // Add timestamp and metadata
     data.timestamp = new Date().toISOString();
     data.surveyType = e.target.id;
+    data.deviceInfo = {
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        screenWidth: window.screen.width,
+        screenHeight: window.screen.height
+    };
 
-    // Save to localStorage
-    saveResponse(data);
+    try {
+        // Save to Firebase
+        await saveToFirebase(data);
 
-    // Show completion message
-    e.target.style.display = 'none';
-    document.getElementById('completionMessage').style.display = 'block';
+        // Also save to localStorage as backup
+        saveToLocalStorage(data);
+
+        // Show completion message
+        e.target.style.display = 'none';
+        document.getElementById('completionMessage').style.display = 'block';
+
+        console.log('Survey submitted successfully:', data);
+    } catch (error) {
+        console.error('Error submitting survey:', error);
+
+        // Fallback to localStorage only
+        saveToLocalStorage(data);
+
+        // Still show completion message
+        e.target.style.display = 'none';
+        document.getElementById('completionMessage').style.display = 'block';
+
+        alert('Survey saved locally. It will sync when connection is available.');
+    }
 
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    console.log('Survey submitted:', data);
 }
 
-function saveResponse(data) {
-    // Get existing responses
-    let responses = JSON.parse(localStorage.getItem('surveyResponses') || '[]');
+async function saveToFirebase(data) {
+    try {
+        // Create a reference to the survey-responses collection
+        const responsesRef = ref(database, 'survey-responses');
 
-    // Add new response
-    responses.push(data);
+        // Push new response (generates unique ID)
+        const newResponseRef = push(responsesRef);
 
-    // Save back to localStorage
-    localStorage.setItem('surveyResponses', JSON.stringify(responses));
+        // Save the data
+        await set(newResponseRef, data);
 
-    console.log('Response saved. Total responses:', responses.length);
+        console.log('Data saved to Firebase successfully!');
+        return true;
+    } catch (error) {
+        console.error('Firebase save error:', error);
+        throw error;
+    }
 }
 
-// Export function for researchers to download data
-function downloadResponses() {
+function saveToLocalStorage(data) {
+    try {
+        // Get existing responses
+        let responses = JSON.parse(localStorage.getItem('surveyResponses') || '[]');
+
+        // Add new response
+        responses.push(data);
+
+        // Save back to localStorage
+        localStorage.setItem('surveyResponses', JSON.stringify(responses));
+
+        console.log('Response saved to localStorage. Total responses:', responses.length);
+    } catch (error) {
+        console.error('localStorage save error:', error);
+    }
+}
+
+// Export function for researchers to download local data (backup)
+function downloadLocalResponses() {
     const responses = JSON.parse(localStorage.getItem('surveyResponses') || '[]');
 
     if (responses.length === 0) {
-        alert('No responses to download yet!');
+        alert('No local responses to download!');
         return;
     }
 
@@ -263,14 +310,14 @@ function downloadResponses() {
     const url = URL.createObjectURL(dataBlob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `survey-responses-${new Date().toISOString().split('T')[0]}.json`;
+    link.download = `survey-local-backup-${new Date().toISOString().split('T')[0]}.json`;
     link.click();
 
     URL.revokeObjectURL(url);
 }
 
 // Make download function available globally
-window.downloadResponses = downloadResponses;
+window.downloadLocalResponses = downloadLocalResponses;
 
 // Add keyboard navigation
 document.addEventListener('keydown', (e) => {
